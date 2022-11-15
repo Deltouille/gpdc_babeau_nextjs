@@ -26,6 +26,25 @@ async function fetchAPI(query, { variables } = {}) {
     return json.data
 }
 
+export async function getCategories() {
+    const data = await fetchAPI(
+        `query AllCategories {
+          categories {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      `,
+        {
+            variables: {},
+        }
+    );
+    return data?.categories?.edges;
+}
+
 export async function getPosts(){
     const data = await fetchAPI(
         `query AllPosts {
